@@ -9,15 +9,15 @@
     <ul>
       <% docs.forEach(function(user){ %>
         <li>
-          <a href="/edituser/<%= user._id %>"><%= user.name %></a>
-          <a href="/deleteuser/<%= user._id %>" 
+          <a href="/user/edituser/<%= user._id %>"><%= user.name %></a>
+          <a href="/user/deleteuser/<%= user._id %>" 
             onclick="return confirm('Tem certeza que deseja excluir?');"> || Excluir></a>
-          <a href="/receiveuser/<%= user._id %>" > || Contribuição></a> 
+          <a href="/user/receiveuser/<%= user._id %>" > || Contribuição></a> 
         </li>
         
       <% }) %>
     </ul>
     <hr />
-    <a href="/newuser">Cadastrar novo usuário</a>
+    <a href="/user/newuser">Cadastrar novo usuário</a>
   </body>
 </html>
