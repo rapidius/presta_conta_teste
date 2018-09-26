@@ -51,7 +51,27 @@ function receiveuser(receive, callback){
     global.db.collection("receives").insert(receive, callback);
 }
 
+function createUser(email, password, name, phone, cpf, callback){
+    const cryptPwd = bcrypt.hashSync(password, 10)
+    global.db.collection("users").insert({email, password: cryptPwd, name, 
+        phone, cpf}, function(err, result){
+        callback(err, result)
+    })
+}
+
+function findUserByEmail(email, callback){
+    global.db.collection("users").findOne({email}, callback)
+}
+
+function changePassword(email, password){
+    const cryptPwd = bcrypt.hashSync(password, 10)
+    global.db.collection("users").updateOne({email}, {$set:{password: cryptPwd}})
+}
+
+
+
 
 module.exports = { findAll, insert, findOne, update, deleteOne, 
-    findallusers, insertuser, findoneuser, updateuser, deleteoneuser, receiveuser}
+    findallusers, insertuser, findoneuser, updateuser, deleteoneuser, 
+    receiveuser, createUser, findUserByEmail, changePassword}
 

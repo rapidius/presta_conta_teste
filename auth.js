@@ -3,8 +3,8 @@ const LocalStrategy = require('passport-local').Strategy
 
 module.exports = function(passport){
     
-    function findUser(username, callback){
-        global.db.collection("users").findOne({"username": username}, function(err, doc){
+    function findUser(email, callback){
+        global.db.collection("users").findOne({"email": email}, function(err, doc){
             callback(err, doc);
         });
     }
@@ -28,16 +28,18 @@ module.exports = function(passport){
     });
 
     passport.use(new LocalStrategy( { 
-        usernameField: 'username',
+        usernameField: 'email',
         passwordField: 'password'
     },
-    (username, password, done) => {
-        findUser(username, (err, user) => {
+    (email, password, done) => {
+        findUser(email, (err, user) => {
         if (err) { return done(err) }
 
         // usuário inexistente
         if (!user) { return done(null, false) }
 
+
+       
         // comparando as senhas
         bcrypt.compare(password, user.password, (err, isValid) => {
             if (err) { return done(err) }
