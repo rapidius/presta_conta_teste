@@ -24,6 +24,7 @@ global.authenticationMiddleware = () => {
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 var loginRouter = require('./routes/login');
+var categoryRouter = require('./routes/category');
 
 var app = express();
 
@@ -58,6 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', loginRouter);
 app.use('/index', indexRouter);
 app.use('/user', userRouter);
+app.use('/category', categoryRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

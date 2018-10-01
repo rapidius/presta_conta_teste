@@ -69,9 +69,36 @@ function changePassword(email, password){
 }
 
 
+/**category */
+
+function findallcategories(callback){  
+    //global.conn.collection("users").find({}).toArray(callback);
+    global.db.collection("categories").find({}).toArray(callback);
+}
+
+function insertcategory(category, callback){
+    global.db.collection("categories").insert(category, callback);
+}
+
+var ObjectId = require("mongodb").ObjectId;
+function findonecategory(id, callback){  
+    global.db.collection("categories").find(new ObjectId(id)).toArray(callback);
+}
+
+function updatecategory(id, category, callback){
+    global.db.collection("categories").updateOne({_id:new ObjectId(id)}, 
+        {$set:{description:category.description}}, callback);
+}
+
+function deleteonecategory(id, callback){
+    global.db.collection("categories").deleteOne({_id: new ObjectId(id)}, callback);
+}
+
+
 
 
 module.exports = { findAll, insert, findOne, update, deleteOne, 
     findallusers, insertuser, findoneuser, updateuser, deleteoneuser, 
-    receiveuser, createUser, findUserByEmail, changePassword}
+    receiveuser, createUser, findUserByEmail, changePassword, 
+    findallcategories, insertcategory, findonecategory, updatecategory, deleteonecategory}
 

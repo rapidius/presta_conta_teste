@@ -9,6 +9,7 @@
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "~1.4.3",
+    "d3": "^5.7.0",
     "debug": "~2.6.9",
     "dotenv-safe": "^6.0.0",
     "ejs": "~2.5.7",
